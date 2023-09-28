@@ -122,4 +122,44 @@ ggplot(weather_df, aes(x = tmin, y = tmax,color = name)) +
 
     ## Warning: Removed 17 rows containing missing values (`geom_point()`).
 
-![](Viz---EDA_files/figure-gfm/unnamed-chunk-8-1.png)<!-- -->
+![](Viz---EDA_files/figure-gfm/unnamed-chunk-8-1.png)<!-- --> Let’s try
+a different plot.
+
+`size = prcp`: higher `prcp` will have bigger points
+
+``` r
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .5) +
+  geom_smooth(se = FALSE) + 
+  facet_grid(. ~ name)
+```
+
+    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+    ## Warning: Removed 17 rows containing non-finite values (`stat_smooth()`).
+
+    ## Warning: Removed 19 rows containing missing values (`geom_point()`).
+
+![](Viz---EDA_files/figure-gfm/unnamed-chunk-9-1.png)<!-- -->
+
+try assigning a specific color
+
+``` r
+weather_df |>
+  filter(name=="CentralPark_NY") |>
+  ggplot(aes(x=date,y=tmax))+
+  geom_point(color="blue") 
+```
+
+![](Viz---EDA_files/figure-gfm/unnamed-chunk-10-1.png)<!-- -->
+
+``` r
+weather_df |>
+  filter(name!="CentralPark_NY") |>
+  ggplot(aes(x=date,y=tmax,color=name))+
+  geom_point(alpha=.7,size=.5) 
+```
+
+    ## Warning: Removed 17 rows containing missing values (`geom_point()`).
+
+![](Viz---EDA_files/figure-gfm/unnamed-chunk-10-2.png)<!-- -->

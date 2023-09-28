@@ -78,6 +78,28 @@ ggplot(weather_df, aes(x = tmin, y = tmax,color = name)) +
   geom_smooth() +
   facet_grid(.~name)
 ```
+Let's try a different plot.
+
+`size = prcp`: higher `prcp` will have bigger points
+```{r}
+ggplot(weather_df, aes(x = date, y = tmax, color = name)) + 
+  geom_point(aes(size = prcp), alpha = .5) +
+  geom_smooth(se = FALSE) + 
+  facet_grid(. ~ name)
+```
+
+try assigning a specific color
+```{r}
+weather_df |>
+  filter(name=="CentralPark_NY") |>
+  ggplot(aes(x=date,y=tmax))+
+  geom_point(color="blue") 
+
+weather_df |>
+  filter(name!="CentralPark_NY") |>
+  ggplot(aes(x=date,y=tmax,color=name))+
+  geom_point(alpha=.7,size=.5) 
+```
 
 
 
